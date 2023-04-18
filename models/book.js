@@ -17,23 +17,23 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
-          notEmpty: false
+          notEmpty: true
         }
       },
       author: {
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
-          notEmpty: false
+          notEmpty: true
         }
       },
       genre: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: true
       },
       year: {
         type: DataTypes.INTEGER,
-        allowNull: false
+        allowNull: true
       }
     },
     {

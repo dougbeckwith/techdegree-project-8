@@ -1,0 +1,30 @@
+extends layout.pug
+  
+block content 
+    h1 New Book 
+    form(action="/books/new" method="POST")
+      if errors 
+          h2(class="error") Oooops! 
+          ul(class="error")
+            each val in errors
+              if val.message === 'Validation notEmpty on author failed'
+                li= 'Please Enter A Author'
+              else if val.message === 'Validation notEmpty on title failed'
+                li= 'Please Enter A Title'
+      p
+        label(for="title") Title 
+        input(name="title" type="text" id="title")
+      p
+        label(for="author") Author 
+        input(name="author" type="text" id="author")
+      p
+        label(for="genre") Genre 
+        input(name="genre" type="text" id="genre")
+      p
+        label(for="year") Year 
+        input(name="year" type="text" id="year") 
+      p 
+        input(type="submit" value="Create New Book")  
+      p 
+        a(class="button" href="/books") Cancel
+    

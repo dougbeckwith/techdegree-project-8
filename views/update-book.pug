@@ -1,0 +1,46 @@
+extends layout.pug
+
+block content
+
+    h1 Edit Book
+    form(action=`/books/${id}` method="POST")
+      if errors 
+          h2(class="error") Oooops! 
+          ul(class="error")
+            each val in errors
+              if val.message === 'Validation notEmpty on author failed'
+                li= 'Please Enter A Author'
+              else if val.message === 'Validation notEmpty on title failed'
+                li= 'Please Enter A Title'
+      p
+        label(for="title") Title 
+        input(name="title" type="text" id="title" value=`${book.title ? book.title : ''}`)
+      p
+        label(for="author") Author 
+        input(name="author" type="text" id="author" value=`${book.author}`)
+      p
+        label(for="genre") Genre 
+        input(name="genre" type="text" id="genre" value=`${book.genre}`)
+      p
+        label(for="year") Year 
+        input(name="year" type="text" id="year" value=`${book.year}`) 
+      p 
+        input(type="submit" value="Update Book")  
+      
+    form(id="delete")
+      p 
+        a(class="button" href="/books") Cancel
+      p 
+        input(id=`${id}` type="submit"  value="Delete")
+      
+
+    script.
+      const deleteHandler = async (e) => {
+        e.preventDefault()
+        const id = e.submitter.id
+        await fetch(`/books/${id}/delete`, { method: 'DELETE' })
+        window.location.href = 'http://localhost:3000/books/';
+      }
+      var form = document.getElementById("delete");
+      form.addEventListener("submit", deleteHandler) 
+      

@@ -9,9 +9,9 @@ router.get("/", async function (req, res, next) {
     const books = await Book.findAll();
 
     if (books.length !== 0) {
-      res.render("books", { books });
+      res.render("index", { books });
     } else {
-      res.render("books", { books: null });
+      res.render("index", { books: null });
     }
   } catch (err) {
     console.log(err);
